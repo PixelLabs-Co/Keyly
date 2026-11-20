@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keyly for agents: new home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E4D5C}a:hover{color:#0B2730}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F7F5F0; color: #0B2730; font-family: 'Plus Jakarta Sans', system-ui, sans-serif">
+  <div style="flex: 1 1 240px; display: flex; background: #0B2730">
+    <dc-import name="AgentNav" active="homes" hint-size="100%,100%"></dc-import>
+  </div>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 32px clamp(20px, 4vw, 56px) 48px; display: flex; flex-direction: column; gap: 22px">
+    <a href="AgentHomes.dc.html" style="align-self: flex-start; height: 40px; display: flex; align-items: center; gap: 4px; text-decoration: none; font-size: 14px; font-weight: 700; color: #0E4D5C">
+      <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="#0E4D5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>Homes</a>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.2px">Add a home</h1>
+      <p style="margin: 0; font-size: 15px; color: #3F5A62">Start with the basics. You can fill in documents and details next.</p>
+    </div>
+
+    <ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px">
+      <li style="height: 36px; padding: 0 14px; border-radius: 18px; background: #0E4D5C; color: #F4EDE1; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700"><span style="width: 20px; height: 20px; border-radius: 10px; background: #E2725B; color: #0B2730; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800">1</span>Home &amp; buyer</li>
+      <li style="height: 36px; padding: 0 14px; border-radius: 18px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #DED6C8; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #3F5A62"><span style="width: 20px; height: 20px; border-radius: 10px; background: #F4EDE1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800">2</span>Details</li>
+      <li style="height: 36px; padding: 0 14px; border-radius: 18px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #DED6C8; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #3F5A62"><span style="width: 20px; height: 20px; border-radius: 10px; background: #F4EDE1; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800">3</span>Preview &amp; send</li>
+    </ol>
+
+    <div style="max-width: 860px; display: flex; flex-direction: column; gap: 20px">
+      <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+        <h2 style="margin: 0; font-size: 18px; font-weight: 800">The home</h2>
+        <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Address<input type="text" placeholder="Start typing an address" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+        <button style="height: 140px; border: 2px dashed #CFC5B5; border-radius: 16px; background: #FBF9F5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: 'Plus Jakarta Sans', sans-serif; color: #0B2730">
+          <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="#0E4D5C" stroke-width="2"></rect><circle cx="9" cy="10" r="1.8" fill="#0E4D5C"></circle><path d="M5 17l5-4 3 2 3-3 3 3" fill="none" stroke="#0E4D5C" stroke-width="2" stroke-linejoin="round"></path></svg>
+          <span style="font-size: 14px; font-weight: 700">Add a home photo</span><span style="font-size: 12px; color: #3F5A62">It becomes the cover of their app</span></button>
+      </section>
+
+      <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+        <h2 style="margin: 0; font-size: 18px; font-weight: 800">The buyer</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px">
+          <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Buyer name(s)<input type="text" placeholder="[Buyer names]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+          <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Closing date<input type="date" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+          <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Email<input type="email" placeholder="[Buyer email]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+          <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Mobile phone<input type="tel" placeholder="[Buyer phone]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #3F5A62">Nothing is sent to the buyer until you choose to send it.</p>
+      </section>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end">
+        <a href="AgentHomes.dc.html" style="height: 50px; padding: 0 24px; border-radius: 14px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #CFC5B5; color: #0B2730; text-decoration: none; display: flex; align-items: center; font-size: 15px; font-weight: 700">Save as draft</a>
+        <a href="AgentHomeDetails.dc.html" style="height: 50px; padding: 0 28px; border-radius: 14px; background: #E2725B; color: #0B2730; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800">Continue to details
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="#0B2730" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

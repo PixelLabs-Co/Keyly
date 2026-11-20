@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keyly for agents: account and plan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E4D5C}a:hover{color:#0B2730}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F7F5F0; color: #0B2730; font-family: 'Plus Jakarta Sans', system-ui, sans-serif">
+  <div style="flex: 1 1 240px; display: flex; background: #0B2730">
+    <dc-import name="AgentNav" active="account" hint-size="100%,100%"></dc-import>
+  </div>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 40px clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.2px">Account &amp; plan</h1>
+      <p style="margin: 0; font-size: 15px; color: #3F5A62">Your subscription, billing and sign-in.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+      <section style="flex: 1 1 360px; min-width: 0; background: #0E4D5C; color: #F4EDE1; border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+        <p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #7FC8B8">Your plan</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px">
+          <p style="margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.8px">[Plan name]</p>
+          <p style="margin: 0; font-size: 16px; color: #CFE3DF">[Price] / month</p>
+        </div>
+        <span style="align-self: flex-start; height: 30px; padding: 0 12px; border-radius: 15px; background: #E2725B; color: #0B2730; display: flex; align-items: center; font-size: 13px; font-weight: 800">Free trial · ends [Date]</span>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #CFE3DF">Includes your branding on every gift, unlimited homes and buyer reminders.</p>
+        <div style="flex: 1"></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <button style="height: 46px; padding: 0 18px; border: 0; border-radius: 14px; background: #F4EDE1; color: #0B2730; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800">Change plan</button>
+          <button style="height: 46px; padding: 0 18px; border: 0; border-radius: 14px; background: transparent; box-shadow: inset 0 0 0 1.5px #7FC8B8; color: #F4EDE1; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700">Manage billing</button>
+        </div>
+      </section>
+
+      <section style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 26px; display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0 0 8px; font-size: 18px; font-weight: 800">Billing</h2>
+        <div style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Payment method</span><span style="font-size: 14px; color: #3F5A62">Card ending [••••]</span></div>
+        <div style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Next payment</span><span style="font-size: 14px; color: #3F5A62">[Date]</span></div>
+        <div style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Invoices</span><a href="#invoices" style="font-size: 14px; font-weight: 700">View all</a></div>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px">
+      <section style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 26px; display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0 0 8px; font-size: 18px; font-weight: 800">Sign-in</h2>
+        <div style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Email</span><span style="font-size: 14px; color: #3F5A62">[Email]</span></div>
+        <div style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Signed in with</span><span style="font-size: 14px; color: #3F5A62">[Apple / Google / Email]</span></div>
+        <div style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px"><span style="font-size: 14px; font-weight: 700">Your brand</span><a href="AgentBrand.dc.html" style="font-size: 14px; font-weight: 700">Edit brand</a></div>
+      </section>
+
+      <section style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 26px; display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0 0 8px; font-size: 18px; font-weight: 800">Help</h2>
+        <a href="#support" style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 700; color: #0B2730">Contact support<span style="color: #0E4D5C">›</span></a>
+        <a href="#privacy" style="min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 700; color: #0B2730">Privacy policy<span style="color: #0E4D5C">›</span></a>
+        <a href="#terms" style="min-height: 52px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 700; color: #0B2730">Terms of service<span style="color: #0E4D5C">›</span></a>
+      </section>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+      <a href="AgentSignIn.dc.html" style="height: 46px; padding: 0 20px; border-radius: 14px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #CFC5B5; color: #0B2730; text-decoration: none; display: flex; align-items: center; font-size: 14px; font-weight: 700">Sign out</a>
+      <button style="height: 46px; padding: 0 12px; border: 0; background: transparent; color: #9A3B27; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700">Delete account</button>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

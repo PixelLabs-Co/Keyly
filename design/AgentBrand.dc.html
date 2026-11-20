@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keyly for agents: brand setup</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E4D5C}a:hover{color:#0B2730}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F7F5F0; color: #0B2730; font-family: 'Plus Jakarta Sans', system-ui, sans-serif">
+  <div style="flex: 1 1 240px; display: flex; background: #0B2730">
+    <dc-import name="AgentNav" active="brand" hint-size="100%,100%"></dc-import>
+  </div>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 40px clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.2px">Your brand</h1>
+      <p style="margin: 0; font-size: 15px; color: #3F5A62">This is how you’ll appear in every buyer’s Keyly app.</p>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+      <div style="flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+        <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+          <h2 style="margin: 0; font-size: 18px; font-weight: 800">Logo &amp; photo</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 16px">
+            <button style="flex: 1 1 220px; height: 120px; border: 2px dashed #CFC5B5; border-radius: 16px; background: #FBF9F5; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-family: 'Plus Jakarta Sans', sans-serif; color: #0B2730">
+              <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16" fill="none" stroke="#0E4D5C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <span style="font-size: 14px; font-weight: 700">Upload your logo</span><span style="font-size: 12px; color: #3F5A62">PNG or SVG</span></button>
+            <button style="flex: 1 1 220px; height: 120px; border: 2px dashed #CFC5B5; border-radius: 16px; background: #FBF9F5; display: flex; align-items: center; justify-content: center; gap: 14px; font-family: 'Plus Jakarta Sans', sans-serif; color: #0B2730">
+              <span style="width: 64px; height: 64px; border-radius: 32px; background: #F4EDE1; display: flex; align-items: center; justify-content: center"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6" fill="none" stroke="#0E4D5C" stroke-width="2"></circle><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="#0E4D5C" stroke-width="2" stroke-linecap="round"></path></svg></span>
+              <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><span style="font-size: 14px; font-weight: 700">Add your headshot</span><span style="font-size: 12px; color: #3F5A62">Buyers see this first</span></span></button>
+          </div>
+        </section>
+
+        <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-size: 18px; font-weight: 800">Brand color</h2>
+            <p style="margin: 0; font-size: 13px; color: #3F5A62">Used on the buyer’s welcome screen and your agent card.</p>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px">
+            <sc-for list="{{swatches}}" as="s" hint-placeholder-count="6">
+              <button onClick="{{s.pick}}" aria-label="{{s.name}}" aria-pressed="{{s.on}}" style="width: 52px; height: 52px; border: 0; border-radius: 26px; background: {{s.hex}}; box-shadow: {{s.ring}}; padding: 0"></button>
+            </sc-for>
+          </div>
+          <p style="margin: 0; font-size: 13px; color: #3F5A62">Selected: <span style="font-weight: 700; color: #0B2730">{{current.name}}</span> · {{current.hex}}</p>
+        </section>
+
+        <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 24px; display: flex; flex-direction: column; gap: 16px">
+          <h2 style="margin: 0; font-size: 18px; font-weight: 800">Your details</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 16px">
+            <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Name<input type="text" placeholder="[Your name]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+            <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Brokerage<input type="text" placeholder="[Brokerage]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+            <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Phone<input type="tel" placeholder="[Phone]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+            <label style="flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Email<input type="email" placeholder="[Email]" style="height: 48px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px"></label>
+          </div>
+        </section>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 12px">
+          <a href="AgentHomes.dc.html" style="height: 50px; padding: 0 28px; border-radius: 14px; background: #E2725B; color: #0B2730; text-decoration: none; display: flex; align-items: center; font-size: 15px; font-weight: 800">Save brand</a>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px 16px; border-radius: 24px; background: #E9E1D3">
+        <p style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #3F5A62">Live preview</p>
+        <div style="width: 270px; height: 560px; box-sizing: border-box; border: 8px solid #0B2730; border-radius: 40px; background: #F7F5F0; overflow: hidden; display: flex; flex-direction: column">
+          <div style="height: 300px; box-sizing: border-box; background: {{current.hex}}; padding: 34px 18px 18px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px">
+            <p style="margin: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F4EDE1; opacity: 0.85">A gift from</p>
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span style="width: 44px; height: 44px; border-radius: 22px; background: #F4EDE1; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.6" fill="none" stroke="{{current.hex}}" stroke-width="2"></circle><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6" fill="none" stroke="{{current.hex}}" stroke-width="2" stroke-linecap="round"></path></svg></span>
+              <span style="display: flex; flex-direction: column"><span style="font-size: 17px; font-weight: 800; color: #F4EDE1">[Your name]</span><span style="font-size: 12px; color: #F4EDE1; opacity: 0.85">[Brokerage]</span></span>
+            </div>
+          </div>
+          <div style="flex: 1; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+            <p style="margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -1px">Welcome home.</p>
+            <p style="margin: 0; font-size: 12px; color: #3F5A62">[Home address]</p>
+            <div style="flex: 1"></div>
+            <div style="height: 42px; border-radius: 12px; background: #000000; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700">Continue with Apple</div>
+          </div>
+        </div>
+        <p style="margin: 0; max-width: 280px; font-size: 12px; line-height: 1.5; color: #3F5A62; text-align: center">Keyly keeps the rest of the app consistent so it always looks polished.</p>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { pick: 'Keyly Teal' };
+  }
+  renderVals() {
+    const list = [
+      { name: 'Keyly Teal', hex: '#0E4D5C' },
+      { name: 'Navy', hex: '#1B2A4A' },
+      { name: 'Forest', hex: '#1F4D3A' },
+      { name: 'Burgundy', hex: '#6B2235' },
+      { name: 'Plum', hex: '#4A2C5E' },
+      { name: 'Charcoal', hex: '#2E2E2E' }
+    ];
+    const pick = (this.state && this.state.pick) || 'Keyly Teal';
+    const current = list.find((s) => s.name === pick) || list[0];
+    return {
+      current,
+      swatches: list.map((s) => ({
+        ...s,
+        on: s.name === pick,
+        ring: s.name === pick ? '0 0 0 3px #F7F5F0, 0 0 0 6px #E2725B' : 'inset 0 0 0 1px rgba(0,0,0,0.1)',
+        pick: () => this.setState({ pick: s.name })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

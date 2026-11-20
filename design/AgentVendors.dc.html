@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keyly for agents: my vendors</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E4D5C}a:hover{color:#0B2730}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F7F5F0; color: #0B2730; font-family: 'Plus Jakarta Sans', system-ui, sans-serif">
+  <div style="flex: 1 1 240px; display: flex; background: #0B2730">
+    <dc-import name="AgentNav" active="vendors" hint-size="100%,100%"></dc-import>
+  </div>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 40px clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.2px">My vendors</h1>
+      <p style="margin: 0; font-size: 15px; color: #3F5A62">Your go-to pros. Save them once, then add them to any home.</p>
+    </div>
+
+    <section style="background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+      <h2 style="margin: 0; font-size: 17px; font-weight: 800">Add a vendor</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end">
+        <label style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Category
+          <select style="height: 46px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #0B2730"><option>Plumbing</option><option>HVAC</option><option>Electrical</option><option>Landscaping</option><option>Handyman</option><option>Other</option></select></label>
+        <label style="flex: 2 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Company name<input type="text" placeholder="[Company name]" style="height: 46px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px"></label>
+        <label style="flex: 1 1 170px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Phone<input type="tel" placeholder="[Phone]" style="height: 46px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px"></label>
+        <label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700">Website<input type="url" placeholder="Optional" style="height: 46px; border: 0; border-radius: 12px; background: #FBF9F5; box-shadow: inset 0 0 0 1px #D9D0C2; padding: 0 14px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px"></label>
+        <button style="height: 46px; padding: 0 22px; border: 0; border-radius: 12px; background: #E2725B; color: #0B2730; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 800">Save vendor</button>
+      </div>
+    </section>
+
+    <div style="overflow-x: auto; background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF">
+      <div style="min-width: 640px">
+        <div style="display: grid; grid-template-columns: 1fr 2fr 1.2fr 1.4fr 60px; gap: 16px; padding: 14px 20px; border-bottom: 1px solid #EEE7DB; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3F5A62">
+          <span>Category</span><span>Company</span><span>Phone</span><span>Add to new homes</span><span></span>
+        </div>
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 1fr 2fr 1.2fr 1.4fr 60px; gap: 16px; align-items: center; padding: 0 20px; min-height: 64px; border-bottom: 1px solid #EEE7DB">
+            <span><span style="display: inline-flex; height: 28px; align-items: center; padding: 0 12px; border-radius: 14px; background: #DCEAE6; color: #0E4D5C; font-size: 13px; font-weight: 700">{{r.cat}}</span></span>
+            <span style="font-size: 15px; font-weight: 700">[{{r.cat}} company]</span>
+            <span style="font-size: 14px; color: #3F5A62">[Phone]</span>
+            <button onClick="{{r.toggle}}" role="switch" aria-checked="{{r.on}}" aria-label="Add to new homes" style="width: 46px; height: 28px; border: 0; border-radius: 14px; background: {{r.track}}; display: flex; align-items: center; justify-content: {{r.justify}}; padding: 0 3px"><span style="width: 22px; height: 22px; border-radius: 11px; background: #FFFFFF"></span></button>
+            <button aria-label="Edit vendor" style="width: 44px; height: 44px; border: 0; border-radius: 12px; background: #F4EDE1; display: flex; align-items: center; justify-content: center; padding: 0">
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="#0E4D5C" stroke-width="2" stroke-linejoin="round"></path></svg>
+            </button>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { def: { Plumbing: true, HVAC: true, Electrical: false, Landscaping: false, Handyman: true } };
+  }
+  renderVals() {
+    const def = (this.state && this.state.def) || {};
+    return {
+      rows: ['Plumbing', 'HVAC', 'Electrical', 'Landscaping', 'Handyman'].map((c) => {
+        const on = !!def[c];
+        return { cat: c, on, track: on ? '#0E4D5C' : '#CFC5B5', justify: on ? 'flex-end' : 'flex-start', toggle: () => this.setState({ def: { ...def, [c]: !on } }) };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Keyly for agents: homes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#0E4D5C}a:hover{color:#0B2730}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #F7F5F0; color: #0B2730; font-family: 'Plus Jakarta Sans', system-ui, sans-serif">
+  <div style="flex: 1 1 240px; display: flex; background: #0B2730">
+    <dc-import name="AgentNav" active="homes" hint-size="100%,100%"></dc-import>
+  </div>
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 40px clamp(20px, 4vw, 56px); display: flex; flex-direction: column; gap: 24px">
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h1 style="margin: 0; font-size: 36px; font-weight: 800; letter-spacing: -1.2px">Homes</h1>
+        <p style="margin: 0; font-size: 15px; color: #3F5A62">Every home you’ve set up for a buyer.</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <label style="height: 46px; min-width: 220px; border-radius: 14px; background: #FFFFFF; box-shadow: inset 0 0 0 1px #DED6C8; display: flex; align-items: center; gap: 10px; padding: 0 14px">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="#3F5A62" stroke-width="2"></circle><path d="M16 16l4 4" stroke="#3F5A62" stroke-width="2" stroke-linecap="round"></path></svg>
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search homes</span>
+          <input type="search" placeholder="Search address or buyer" style="flex: 1; min-width: 0; border: 0; outline: none; background: transparent; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: #0B2730">
+        </label>
+        <a href="AgentNewHome.dc.html" style="height: 46px; padding: 0 20px; border-radius: 14px; background: #E2725B; color: #0B2730; text-decoration: none; display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 800">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#0B2730" stroke-width="2.4" stroke-linecap="round"></path></svg>Add a home</a>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{chips}}" as="c" hint-placeholder-count="4">
+        <button onClick="{{c.pick}}" aria-pressed="{{c.on}}" style="height: 38px; padding: 0 16px; border: 0; border-radius: 19px; background: {{c.bg}}; color: {{c.fg}}; box-shadow: inset 0 0 0 1px #DED6C8; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700">{{c.label}}</button>
+      </sc-for>
+    </div>
+
+    <div style="overflow-x: auto; background: #FFFFFF; border-radius: 20px; box-shadow: inset 0 0 0 1px #E4DCCF">
+      <div style="min-width: 680px">
+        <div style="display: grid; grid-template-columns: 2.2fr 1.4fr 1fr 1fr 40px; gap: 16px; padding: 14px 20px; border-bottom: 1px solid #EEE7DB; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #3F5A62">
+          <span>Home</span><span>Buyer</span><span>Closing</span><span>Status</span><span></span>
+        </div>
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="5">
+          <a href="AgentHomeDetails.dc.html" style="display: grid; grid-template-columns: 2.2fr 1.4fr 1fr 1fr 40px; gap: 16px; align-items: center; padding: 0 20px; min-height: 68px; border-bottom: 1px solid #EEE7DB; text-decoration: none; color: #0B2730">
+            <span style="display: flex; align-items: center; gap: 12px; min-width: 0">
+              <span style="width: 40px; height: 40px; border-radius: 10px; background: #DCEAE6; display: flex; align-items: center; justify-content: center; flex-shrink: 0">
+                <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z" fill="none" stroke="#0E4D5C" stroke-width="2" stroke-linejoin="round"></path></svg>
+              </span>
+              <span style="font-size: 15px; font-weight: 700">[Home address]</span>
+            </span>
+            <span style="font-size: 14px">[Buyer name]</span>
+            <span style="font-size: 14px; color: #3F5A62">[Date]</span>
+            <span><span style="display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 14px; background: {{r.pillBg}}; color: {{r.pillFg}}; font-size: 13px; font-weight: 700">{{r.status}}</span></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="#3F5A62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 18px 20px; border-radius: 18px; background: #F4EDE1">
+      <span style="width: 10px; height: 10px; border-radius: 5px; background: #E2725B"></span>
+      <p style="margin: 0; flex: 1; min-width: 240px; font-size: 14px; line-height: 1.5">Tip: set up the home a week before closing, then send the gift at the closing table so it’s ready when they get the keys.</p>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'All' };
+  }
+  renderVals() {
+    const filter = (this.state && this.state.filter) || 'All';
+    const pill = {
+      Draft: { pillBg: '#F4EDE1', pillFg: '#0B2730' },
+      Invited: { pillBg: '#F6D6C8', pillFg: '#7A2E1E' },
+      Active: { pillBg: '#DCEAE6', pillFg: '#0E4D5C' }
+    };
+    const all = ['Active', 'Invited', 'Draft', 'Active', 'Active'].map((s) => ({ status: s, ...pill[s] }));
+    return {
+      chips: ['All', 'Draft', 'Invited', 'Active'].map((c) => ({
+        label: c,
+        on: c === filter,
+        bg: c === filter ? '#0E4D5C' : '#FFFFFF',
+        fg: c === filter ? '#F4EDE1' : '#0B2730',
+        pick: () => this.setState({ filter: c })
+      })),
+      rows: filter === 'All' ? all : all.filter((r) => r.status === filter)
+    };
+  }
+}
+</script>
+</body>
+</html>
