@@ -83,7 +83,10 @@ export default function HomeDetails() {
           <h1 className="page-title" style={{ fontSize: 34 }}>{home.address}</h1>
           <p className="muted">For {home.buyer.names || 'your buyer'} · Closing {formatDate(home.closingDate)}</p>
         </div>
-        <span className={`pill pill-${home.status}`} style={{ height: 30 }}>{home.status[0].toUpperCase() + home.status.slice(1)}</span>
+        <div className="row-gap" style={{ alignItems: 'center' }}>
+          <Link to={`/homes/${id}/edit`} className="btn btn-ghost" style={{ minHeight: 44 }}>Edit home &amp; buyer</Link>
+          <span className={`pill pill-${home.status}`} style={{ height: 30 }}>{home.status[0].toUpperCase() + home.status.slice(1)}</span>
+        </div>
       </div>
 
       <div className="detail-cols">
