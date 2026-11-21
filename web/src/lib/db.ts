@@ -94,3 +94,19 @@ export async function deleteVendor(id: string): Promise<void> {
   if (!firebaseConfigured) { write(K.vendors, read<Vendor>(K.vendors).filter((y) => y.id !== id)); return }
   await deleteDoc(doc(getFbDb(), 'vendors', id))
 }
+
+/* ---------- Account deletion ---------- */
+export async function deleteAgentData(agentId: string, profile: { logoPath?: string; headshotPath?: string } | null): Promise<void> {
+  if (!firebaseConfigured) {
+    Object.keys(localStorage).filter((k) => k.startsWith('keyly.demo.')).forEach((k) => localStorage.removeItem(k))
+    return
+  }
+  for (const h of await listHomes(agentId)) {
+    for (const d of await listDocuments(h.id)) await removeDocument(h.id, d)
+    if (h.photoPath) await deleteObject(ref(getFbStorage(), h.photoPath)).catch(() => {})
+    await deleteDoc(doc(getFbDb(), 'homes', h.id))
+  }
+  for (const v of await listVendors(agentId)) await deleteVendor(v.id)
+  for (const path of [profile?.logoPath, profile?.headshotPath]) if (path) await deleteObject(ref(getFbStorage(), path)).catch(() => {})
+  await deleteDoc(doc(getFbDb(), 'agents', agentId))
+}

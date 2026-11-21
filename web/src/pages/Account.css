@@ -1,0 +1,20 @@
+.acc-grid { display: flex; flex-wrap: wrap; gap: 20px; }
+.acc-grid > section { flex: 1 1 320px; min-width: 0; }
+.plan-card { flex-basis: 360px !important; background: var(--teal); color: var(--cream); border-radius: 20px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+.plan-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.plan-name .big { margin: 0; font-size: 30px; font-weight: 800; letter-spacing: -0.8px; }
+.plan-name .price { margin: 0; font-size: 16px; color: #CFE3DF; }
+.trial-pill { align-self: flex-start; height: 30px; padding: 0 12px; border-radius: 15px; background: var(--clay); color: var(--ink); display: flex; align-items: center; font-size: 13px; font-weight: 800; }
+.plan-blurb { margin: 0; font-size: 14px; line-height: 1.5; color: #CFE3DF; }
+.plan-note { margin: 0; font-size: 13px; color: var(--sea-glass); font-weight: 600; }
+.acc-card { padding: 26px; display: flex; flex-direction: column; gap: 4px; }
+.acc-card .section-title { margin-bottom: 8px; }
+.acc-row { min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; }
+.acc-row.last { border-bottom: 0; }
+.acc-label { font-weight: 700; }
+.acc-val { color: var(--muted); text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.acc-val a, .acc-val .linklike { font-size: 14px; }
+.help-link { min-height: 52px; border-bottom: 1px solid #EEE7DB; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 700; color: var(--ink); }
+.help-link.last { border-bottom: 0; }
+.help-link span { color: var(--teal); }
+.delete-card { display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 0 0 1px #E3B8AC; max-width: 560px; }
