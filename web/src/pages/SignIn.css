@@ -1,0 +1,22 @@
+.signin { min-height: 100vh; display: flex; flex-wrap: wrap; }
+.signin-brand { flex: 1 1 440px; min-width: 0; background: var(--teal); color: var(--cream); padding: 48px clamp(24px, 5vw, 72px); display: flex; flex-direction: column; gap: 32px; }
+.signin-logo { display: flex; align-items: center; gap: 10px; }
+.signin-pitch { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 24px; max-width: 520px; }
+.signin-pitch h1 { margin: 0; font-size: clamp(34px, 4vw, 52px); font-weight: 800; letter-spacing: -1.6px; line-height: 1.05; }
+.signin-pitch p { margin: 0; font-size: 18px; line-height: 1.55; color: #CFE3DF; }
+.signin-form-wrap { flex: 1 1 440px; min-width: 0; padding: 48px 24px; display: flex; align-items: center; justify-content: center; }
+.signin-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 16px; }
+.signin-form h2 { margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -1px; }
+.signin-form p { margin: 0; }
+.si-btn, .si-apple { height: 52px; border-radius: 14px; width: 100%; }
+.si-apple { background: #000; color: #fff; border: 0; }
+.si-or { display: flex; align-items: center; gap: 12px; }
+.si-or span { flex: 1; height: 1px; background: var(--border-2); }
+.si-or em { font-style: normal; font-size: 13px; color: var(--muted); }
+.si-label { display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; }
+.si-new { text-align: center; font-size: 14px; color: var(--muted); }
+.linklike { background: none; border: 0; padding: 0; font-weight: 700; color: var(--teal); text-decoration: underline; cursor: pointer; font-size: inherit; }
+.si-msg { color: var(--teal); font-weight: 700; }
+.si-err { color: #B3261E; font-weight: 600; }
+.demo-note { background: var(--cream); border-radius: 12px; padding: 10px 14px; font-size: 13px; color: var(--ink); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }

@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { LogoTile } from './Logo'
 import { Wordmark } from './Logo'
+import { useAuth } from '../lib/auth'
 import './AppShell.css'
 
 const NAV = [
@@ -11,6 +12,7 @@ const NAV = [
 ]
 
 export default function AppShell() {
+  const { profile } = useAuth()
   return (
     <div className="shell">
       <nav className="sidebar" aria-label="Main">
@@ -38,8 +40,8 @@ export default function AppShell() {
             </svg>
           </span>
           <span className="agent-meta">
-            <span className="agent-name">[Agent Name]</span>
-            <span className="agent-brokerage">[Brokerage]</span>
+            <span className="agent-name">{profile?.name || 'Your name'}</span>
+            <span className="agent-brokerage">{profile?.brokerage || 'Your brokerage'}</span>
           </span>
         </div>
       </nav>
