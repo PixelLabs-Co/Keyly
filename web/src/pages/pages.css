@@ -64,3 +64,7 @@ a.trow:hover { background: var(--input); }
 .add-detail { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .add-detail .input { min-height: 44px; border-radius: 12px; }
 .saved { font-size: 13px; color: var(--muted); }
+
+.buyer-block { border-radius: 16px; background: var(--input); box-shadow: inset 0 0 0 1px var(--border); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.buyer-block .input { background: #fff; }
+.buyer-head { display: flex; align-items: center; justify-content: space-between; }

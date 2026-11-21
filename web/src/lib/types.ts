@@ -10,12 +10,15 @@ export const FOLDER_LABELS: Record<DocFolder, string> = {
 
 export type Reminder = { id: string; name: string; schedule: string; enabled: boolean }
 
+export type BuyerPerson = { name: string; email: string; phone: string }
+
 export type Home = {
   id: string
   agentId: string
   address: string
   photoPath?: string
-  buyer: { names: string; nameList?: string[]; email: string; phone: string }
+  // names/email/phone mirror the first buyer so simple readers (and the buyer app) can use them as-is.
+  buyer: { names: string; email: string; phone: string; people?: BuyerPerson[]; nameList?: string[] }
   closingDate: string // YYYY-MM-DD
   status: HomeStatus
   details: {
@@ -31,7 +34,8 @@ export type Home = {
   vendorIds: string[]
   welcomeNote: string
   invite?: { token: string; method: 'text' | 'email' | 'both'; sentAt: number; openedAt?: number }
-  buyerUid?: string
+  buyerUid?: string // legacy single buyer
+  buyerUids?: string[] // one per buyer who accepts in the iPhone app
   createdAt: number
   updatedAt: number
 }
@@ -84,4 +88,12 @@ export function formatNames(list: string[]): string {
   const n = list.map((x) => x.trim()).filter(Boolean)
   if (n.length <= 2) return n.join(' & ')
   return `${n.slice(0, -1).join(', ')} & ${n[n.length - 1]}`
+}
+
+/** All buyers on a home, including homes saved before per-buyer contacts existed. */
+export function buyerPeople(h: Pick<Home, 'buyer'>): BuyerPerson[] {
+  const b = h.buyer
+  if (b.people?.length) return b.people
+  if (b.nameList?.length) return b.nameList.map((name, i) => ({ name, email: i === 0 ? b.email : '', phone: i === 0 ? b.phone : '' }))
+  return [{ name: b.names, email: b.email, phone: b.phone }]
 }

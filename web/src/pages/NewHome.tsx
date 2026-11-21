@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 import { getHome, listVendors, newId, saveHome } from '../lib/db'
 import { uploadFile, useFileUrl } from '../lib/storage'
-import { emptyHome, formatNames, type Home } from '../lib/types'
+import { buyerPeople, emptyHome, formatNames, type BuyerPerson, type Home } from '../lib/types'
 import './pages.css'
 
 export default function NewHome() {
@@ -16,8 +16,9 @@ export default function NewHome() {
   const homeId = editId ?? newHomeId
   const [existing, setExisting] = useState<Home | null>(null)
   const [missing, setMissing] = useState(false)
-  const [f, setF] = useState({ address: '', closingDate: '', email: '', phone: '' })
-  const [names, setNames] = useState<string[]>([''])
+  const [f, setF] = useState({ address: '', closingDate: '' })
+  const blank: BuyerPerson = { name: '', email: '', phone: '' }
+  const [people, setPeople] = useState<BuyerPerson[]>([blank])
   const [photoPath, setPhotoPath] = useState<string>()
   const [preview, setPreview] = useState<string>()
   const [busy, setBusy] = useState(false)
@@ -30,8 +31,8 @@ export default function NewHome() {
     getHome(editId).then((h) => {
       if (!h || h.agentId !== user.uid) { setMissing(true); return }
       setExisting(h)
-      setNames(h.buyer.nameList?.length ? h.buyer.nameList : [h.buyer.names])
-      setF({ address: h.address, closingDate: h.closingDate, email: h.buyer.email, phone: h.buyer.phone })
+      setPeople(buyerPeople(h))
+      setF({ address: h.address, closingDate: h.closingDate })
       setPhotoPath(h.photoPath)
     })
   }, [editId, user])
@@ -60,8 +61,11 @@ export default function NewHome() {
       }
       home.address = f.address.trim()
       home.photoPath = photoPath
-      const list = names.map((x) => x.trim()).filter(Boolean)
-      home.buyer = { names: formatNames(list), nameList: list, email: f.email.trim(), phone: f.phone.trim() }
+      const list = people
+        .map((p) => ({ name: p.name.trim(), email: p.email.trim(), phone: p.phone.trim() }))
+        .filter((p) => p.name || p.email || p.phone)
+      const first = list[0] ?? blank
+      home.buyer = { names: formatNames(list.map((p) => p.name)), email: first.email, phone: first.phone, people: list }
       home.closingDate = f.closingDate
       await saveHome(home)
       nav(next === 'list' ? '/homes' : `/homes/${homeId}`)
@@ -98,21 +102,25 @@ export default function NewHome() {
         <section className="card sec">
           <h2 className="section-title">The buyer</h2>
           <div className="fields">
-            <div className="field" style={{ flexBasis: 240 }}>
-              <span>Buyer name{names.length > 1 ? 's' : ''}</span>
-              {names.map((n, i) => (
-                <span key={i} style={{ display: 'flex', gap: 6 }}>
-                  <input className="input" aria-label={`Buyer ${i + 1} name`} value={n} placeholder={i === 0 ? 'Full name' : 'Another buyer’s full name'}
-                    onChange={(e) => setNames(names.map((x, j) => (j === i ? e.target.value : x)))} />
-                  {names.length > 1 && <button type="button" className="icon-btn" aria-label={`Remove buyer ${i + 1}`} onClick={() => setNames(names.filter((_, j) => j !== i))}>✕</button>}
-                </span>
-              ))}
-              <button type="button" className="btn btn-secondary" style={{ alignSelf: 'flex-start', minHeight: 44, fontSize: 13 }} onClick={() => setNames([...names, ''])}>+ Add another buyer</button>
-            </div>
-            <label>Closing date<input className="input" type="date" value={f.closingDate} onChange={set('closingDate')} /></label>
-            <label>Email<input className="input" type="email" value={f.email} onChange={set('email')} placeholder="Buyer email" /></label>
-            <label>Mobile phone<input className="input" type="tel" value={f.phone} onChange={set('phone')} placeholder="Buyer phone" /></label>
+            <label style={{ flexBasis: 240, maxWidth: 320 }}>Closing date<input className="input" type="date" value={f.closingDate} onChange={set('closingDate')} /></label>
           </div>
+          {people.map((p, i) => {
+            const upd = (k: keyof BuyerPerson) => (e: React.ChangeEvent<HTMLInputElement>) => setPeople(people.map((x, j) => (j === i ? { ...x, [k]: e.target.value } : x)))
+            return (
+              <div className="buyer-block" key={i} role="group" aria-label={`Buyer ${i + 1}`}>
+                <div className="buyer-head">
+                  <span className="label muted">{people.length > 1 ? `Buyer ${i + 1}` : 'Buyer'}</span>
+                  {people.length > 1 && <button type="button" className="icon-btn" aria-label={`Remove buyer ${i + 1}`} onClick={() => setPeople(people.filter((_, j) => j !== i))}>Remove</button>}
+                </div>
+                <div className="fields">
+                  <label>Full name<input className="input" value={p.name} onChange={upd('name')} placeholder="Full name" /></label>
+                  <label>Email<input className="input" type="email" value={p.email} onChange={upd('email')} placeholder="name@email.com" /></label>
+                  <label>Mobile phone<input className="input" type="tel" value={p.phone} onChange={upd('phone')} placeholder="Mobile number" /></label>
+                </div>
+              </div>
+            )
+          })}
+          <button type="button" className="btn btn-secondary" style={{ alignSelf: 'flex-start', minHeight: 44, fontSize: 13 }} onClick={() => setPeople([...people, { ...blank }])}>+ Add another buyer</button>
           <p className="sec-sub">Nothing is sent to the buyer until you choose to send it.</p>
         </section>
         {err && <p role="alert" style={{ color: '#B3261E', fontWeight: 600, margin: 0 }}>{err}</p>}

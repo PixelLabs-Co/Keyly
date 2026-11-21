@@ -102,13 +102,13 @@ vendors/{vendorId}
 
 homes/{homeId}
   agentId, address, photoPath,
-  buyer: { names, email, phone }, closingDate,
+  buyer: { names, email, phone, people: [{name, email, phone}] }, closingDate,  // names/email/phone mirror the first buyer
   status: "draft"|"invited"|"active",
   details: { furnaceYear, waterHeaterYear, roofYear, wifi, waterShutoff, paintColors, extra: [{label, value}] },
   reminders: [{ id, name, schedule, enabled }],
   vendorIds: [vendorId],
   welcomeNote, invite: { token, method: "text"|"email"|"both", sentAt, openedAt },
-  buyerUid (set when the buyer accepts in the iPhone app), createdAt, updatedAt
+  buyerUids: [uid] (one per buyer who accepts in the iPhone app), createdAt, updatedAt
 
 homes/{homeId}/documents/{docId}
   name, folder: "closing"|"inspection"|"warranties"|"buyer", storagePath, uploadedBy: "agent"|"buyer", createdAt
