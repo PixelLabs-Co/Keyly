@@ -6,7 +6,7 @@
 .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 14px; color: var(--ink); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; line-height: 1; border: 0; border-radius: 22px; background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--border-2); font-size: 14px; font-weight: 700; cursor: pointer; }
-.chip[aria-pressed='true'] { background: var(--teal); color: var(--cream); }
+.chip[aria-pressed='true'] { background: var(--teal); color: var(--cream); box-shadow: none; }
 .table-card { overflow-x: auto; background: #fff; border-radius: 20px; box-shadow: inset 0 0 0 1px var(--border); }
 .table-inner { min-width: 680px; }
 .trow { display: grid; grid-template-columns: 2.2fr 1.4fr 1fr 1fr 40px; gap: 16px; align-items: center; padding: 0 20px; border-bottom: 1px solid #EEE7DB; }
@@ -59,8 +59,8 @@ a.trow:hover { background: var(--input); }
 .track.on { background: var(--teal); justify-content: flex-end; }
 .track span { width: 22px; height: 22px; border-radius: 11px; background: #fff; }
 .vchips { display: flex; flex-wrap: wrap; gap: 10px; }
-.vchip { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; line-height: 1; border: 0; border-radius: 22px; background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--border-2); font-size: 13px; font-weight: 700; cursor: pointer; }
-.vchip[aria-pressed='true'] { background: var(--teal); color: var(--cream); }
+.vchip { min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; line-height: 1; border: 0; border-radius: 22px; background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1px var(--border-2); font-size: 13px; font-weight: 700; cursor: pointer; }
+.vchip[aria-pressed='true'] { background: var(--teal); color: var(--cream); box-shadow: none; }
 .add-detail { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
 .add-detail .input { min-height: 44px; border-radius: 12px; }
 .saved { font-size: 13px; color: var(--muted); }
