@@ -175,7 +175,10 @@ export default function HomeDetails() {
                   return (
                     <button key={v.id} className="vchip" aria-pressed={on}
                       onClick={() => update((h) => ({ ...h, vendorIds: on ? h.vendorIds.filter((x) => x !== v.id) : [...h.vendorIds, v.id] }))}>
-                      {on ? '✓' : '+'} {v.category}{v.company ? ` · ${v.company}` : ''}
+                      <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" className="vchip-icon">
+                        {on ? <path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /> : <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />}
+                      </svg>
+                      <span>{v.category}{v.company ? ` · ${v.company}` : ''}</span>
                     </button>
                   )
                 })}
