@@ -33,7 +33,8 @@ export type Home = {
   reminders: Reminder[]
   vendorIds: string[]
   welcomeNote: string
-  invite?: { token: string; method: 'text' | 'email' | 'both'; sentAt: number; openedAt?: number }
+  invite?: { token: string; method: 'text' | 'email' | 'both'; sentAt: number; openedAt?: number } // token = first buyer's
+  invites?: { token: string; name: string; email: string; phone: string }[] // one link per buyer
   buyerUid?: string // legacy single buyer
   buyerUids?: string[] // one per buyer who accepts in the iPhone app
   createdAt: number

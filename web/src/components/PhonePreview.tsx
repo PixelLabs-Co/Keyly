@@ -16,12 +16,14 @@ type Props = {
   headshotUrl?: string | null
   address?: string
   note?: string
+  large?: boolean // the bigger mockup on Preview & send
+  hideAddress?: boolean
 }
 
 /** Buyer welcome screen mockup. Reused on Brand setup and Preview & send. */
-export default function PhonePreview({ color, name, brokerage, headshotUrl, address, note }: Props) {
+export default function PhonePreview({ color, name, brokerage, headshotUrl, address, note, large, hideAddress }: Props) {
   return (
-    <div className="phone">
+    <div className={`phone${large ? ' large' : ''}`}>
       <div className="phone-hero" style={{ background: color }}>
         <p className="phone-gift">A gift from</p>
         <div className="phone-agent">
@@ -43,11 +45,11 @@ export default function PhonePreview({ color, name, brokerage, headshotUrl, addr
         <p className="phone-welcome">Welcome home.</p>
         {note !== undefined ? (
           <div className="phone-note">
-            <p>“{note || 'Your personal welcome note appears here.'}”</p>
+            <p>“{note || 'Your personal note will appear here.'}”</p>
             <span>{name || '[Your name]'}</span>
           </div>
         ) : null}
-        <p className="phone-addr">{address || '[Home address]'}</p>
+        {!hideAddress && <p className="phone-addr">{address || '[Home address]'}</p>}
         <div style={{ flex: 1 }} />
         <div className="phone-apple">Continue with Apple</div>
       </div>
