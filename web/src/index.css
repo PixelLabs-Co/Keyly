@@ -43,3 +43,8 @@ button, input, select, textarea { font-family: inherit; }
 .pill-draft { background: var(--cream); color: var(--ink); }
 .pill-invited { background: var(--blush); color: var(--blush-text); }
 .pill-active { background: var(--teal-tint); color: var(--teal); }
+
+/* Selects: drop the native look (Safari ignores height/border otherwise) and draw our own chevron */
+select, select.input { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='M6 9l6 6 6-6' fill='none' stroke='%230E4D5C' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px !important; cursor: pointer; }
+select.input { background-color: var(--input); }
+.doc-folder select { background-color: var(--cream); }
