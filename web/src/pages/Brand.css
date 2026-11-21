@@ -1,0 +1,19 @@
+.brand-page { display: flex; flex-direction: column; gap: 24px; }
+.brand-cols { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.brand-form { flex: 1 1 440px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+.brand-sec { display: flex; flex-direction: column; gap: 16px; }
+.small { font-size: 13px; margin: 4px 0 0; }
+.upload-row { display: flex; flex-wrap: wrap; gap: 16px; }
+.upload { flex: 1 1 220px; min-height: 120px; border: 2px dashed #CFC5B5; border-radius: 16px; background: var(--input); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--ink); cursor: pointer; padding: 10px; }
+.upload-text { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.upload-text strong { font-size: 14px; font-weight: 700; }
+.upload-text small { font-size: 12px; color: var(--muted); }
+.upload-img { max-height: 56px; max-width: 100%; object-fit: contain; }
+.upload-img.round { width: 56px; height: 56px; border-radius: 28px; object-fit: cover; }
+.swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+.swatch { width: 52px; height: 52px; border: 0; border-radius: 26px; padding: 0; cursor: pointer; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
+.swatch.on { box-shadow: 0 0 0 3px var(--paper), 0 0 0 6px var(--clay); }
+.fields { display: flex; flex-wrap: wrap; gap: 16px; }
+.fields label { flex: 1 1 240px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 700; }
+.fields .input { min-height: 48px; border-radius: 12px; }
+.preview-panel { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px 16px; border-radius: 24px; background: #E9E1D3; }
