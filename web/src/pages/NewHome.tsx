@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import AddressInput from '../components/AddressInput'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 import { getHome, listVendors, newId, saveHome } from '../lib/db'
@@ -82,7 +83,7 @@ export default function NewHome() {
       <div className="form-narrow">
         <section className="card sec">
           <h2 className="section-title">The home</h2>
-          <label className="field">Address<input className="input" value={f.address} onChange={set('address')} placeholder="Start typing an address" /></label>
+          <div className="field"><label htmlFor="addr">Address</label><AddressInput id="addr" value={f.address} onChange={(v) => setF({ ...f, address: v })} placeholder="Start typing an address" /></div>
           <input ref={file} type="file" accept="image/*" hidden onChange={(e) => e.target.files?.[0] && pickPhoto(e.target.files[0])} />
           <button type="button" className="dropzone" style={{ minHeight: 140 }} onClick={() => file.current?.click()}>
             {preview || savedPhoto ? <img src={preview ?? savedPhoto ?? ''} alt="Home" /> : (
