@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAgentOf(agentId) { return signedIn() && request.auth.uid == agentId; }
+    function homeData(homeId) { return get(/databases/$(database)/documents/homes/$(homeId)).data; }
+    function buyerOf(data) {
+      return signedIn() && (
+        (data.get('buyerUids', []).hasAny([request.auth.uid])) ||
+        (data.get('buyerUid', '') == request.auth.uid));
+    }
+
+    // Agent profile: only the agent.
+    match /agents/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Vendors: only the agent who owns them.
+    match /vendors/{vendorId} {
+      allow read, delete: if isAgentOf(resource.data.agentId);
+      allow create: if isAgentOf(request.resource.data.agentId);
+      allow update: if isAgentOf(resource.data.agentId) && request.resource.data.agentId == resource.data.agentId;
+    }
+
+    // Homes: the owning agent has full access; a buyer can read their own home.
+    match /homes/{homeId} {
+      allow read: if isAgentOf(resource.data.agentId) || buyerOf(resource.data);
+      allow create: if isAgentOf(request.resource.data.agentId);
+      allow update: if isAgentOf(resource.data.agentId) && request.resource.data.agentId == resource.data.agentId;
+      allow delete: if isAgentOf(resource.data.agentId);
+
+      // Documents: agent has full access; buyer can read and add their own uploads.
+      match /documents/{docId} {
+        allow read: if isAgentOf(homeData(homeId).agentId) || buyerOf(homeData(homeId));
+        allow create: if isAgentOf(homeData(homeId).agentId)
+                      || (buyerOf(homeData(homeId)) && request.resource.data.uploadedBy == 'buyer');
+        allow update, delete: if isAgentOf(homeData(homeId).agentId);
+      }
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

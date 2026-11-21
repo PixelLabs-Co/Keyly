@@ -20,6 +20,7 @@ export default function NewHome() {
   const blank: BuyerPerson = { name: '', email: '', phone: '' }
   const [people, setPeople] = useState<BuyerPerson[]>([blank])
   const [photoPath, setPhotoPath] = useState<string>()
+  const [photoFile, setPhotoFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string>()
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
@@ -38,13 +39,11 @@ export default function NewHome() {
   }, [editId, user])
   const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value })
 
-  const pickPhoto = async (p: File) => {
+  // The photo is uploaded on save, after the home exists, so storage rules can check ownership.
+  const pickPhoto = (p: File) => {
     setErr('')
-    try {
-      const ext = p.name.split('.').pop() || 'jpg'
-      setPhotoPath(await uploadFile(`homes/${homeId}/photo.${ext}`, p))
-      setPreview(URL.createObjectURL(p))
-    } catch (e) { setErr(e instanceof Error ? e.message : 'Upload failed') }
+    setPhotoFile(p)
+    setPreview(URL.createObjectURL(p))
   }
 
   const save = async (next: 'list' | 'details') => {
@@ -68,6 +67,11 @@ export default function NewHome() {
       home.buyer = { names: formatNames(list.map((p) => p.name)), email: first.email, phone: first.phone, people: list }
       home.closingDate = f.closingDate
       await saveHome(home)
+      if (photoFile) {
+        const ext = photoFile.name.split('.').pop() || 'jpg'
+        home.photoPath = await uploadFile(`homes/${homeId}/photo.${ext}`, photoFile)
+        await saveHome(home)
+      }
       nav(next === 'list' ? '/homes' : `/homes/${homeId}`)
     } catch (e) { setErr(e instanceof Error ? e.message : 'Could not save'); setBusy(false) }
   }

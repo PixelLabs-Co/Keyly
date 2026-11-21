@@ -1,0 +1,39 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() { return request.auth != null; }
+    function homeData(homeId) { return firestore.get(/databases/(default)/documents/homes/$(homeId)).data; }
+    function agentOfHome(homeId) { return signedIn() && request.auth.uid == homeData(homeId).agentId; }
+    function buyerOfHome(homeId) {
+      return signedIn() && (
+        homeData(homeId).get('buyerUids', []).hasAny([request.auth.uid]) ||
+        homeData(homeId).get('buyerUid', '') == request.auth.uid);
+    }
+    function okFile() {
+      return request.resource.size < 25 * 1024 * 1024 &&
+        (request.resource.contentType.matches('image/.*') || request.resource.contentType == 'application/pdf');
+    }
+
+    // Agent brand files: logo and headshot.
+    match /agents/{uid}/{file} {
+      allow read, delete: if signedIn() && request.auth.uid == uid;
+      allow write: if signedIn() && request.auth.uid == uid && okFile();
+    }
+
+    // Home cover photo: agent writes, buyer can read.
+    match /homes/{homeId}/{file} {
+      allow read: if agentOfHome(homeId) || buyerOfHome(homeId);
+      allow write: if agentOfHome(homeId) && okFile();
+      allow delete: if agentOfHome(homeId);
+    }
+
+    // Home documents: agent full access; buyer can read and add their own.
+    match /homes/{homeId}/docs/{file} {
+      allow read: if agentOfHome(homeId) || buyerOfHome(homeId);
+      allow create: if (agentOfHome(homeId) || buyerOfHome(homeId)) && okFile();
+      allow update: if agentOfHome(homeId) && okFile();
+      allow delete: if agentOfHome(homeId);
+    }
+  }
+}
