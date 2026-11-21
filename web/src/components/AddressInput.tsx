@@ -9,7 +9,7 @@ export default function AddressInput({ id, value, onChange, placeholder }: Props
   const [items, setItems] = useState<Suggestion[]>([])
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(-1)
-  const token = useRef<unknown>(null)
+  const token = useRef<string | null>(null)
   const timer = useRef<number>(undefined)
   const justPicked = useRef(false)
   const listId = useId()
@@ -20,7 +20,7 @@ export default function AddressInput({ id, value, onChange, placeholder }: Props
     if (value.trim().length < 3) { setItems([]); return }
     timer.current = window.setTimeout(async () => {
       try {
-        token.current ??= await newSessionToken()
+        token.current ??= newSessionToken()
         const res = await suggestAddresses(value, token.current)
         setItems(res); setActive(-1); setOpen(res.length > 0)
       } catch { setItems([]); setOpen(false) } // fall back to typing freely
