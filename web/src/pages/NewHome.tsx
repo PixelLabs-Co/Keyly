@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
 import { getHome, listVendors, newId, saveHome } from '../lib/db'
 import { uploadFile, useFileUrl } from '../lib/storage'
-import { emptyHome, type Home } from '../lib/types'
+import { emptyHome, formatNames, type Home } from '../lib/types'
 import './pages.css'
 
 export default function NewHome() {
@@ -16,7 +16,8 @@ export default function NewHome() {
   const homeId = editId ?? newHomeId
   const [existing, setExisting] = useState<Home | null>(null)
   const [missing, setMissing] = useState(false)
-  const [f, setF] = useState({ address: '', names: '', closingDate: '', email: '', phone: '' })
+  const [f, setF] = useState({ address: '', closingDate: '', email: '', phone: '' })
+  const [names, setNames] = useState<string[]>([''])
   const [photoPath, setPhotoPath] = useState<string>()
   const [preview, setPreview] = useState<string>()
   const [busy, setBusy] = useState(false)
@@ -29,7 +30,8 @@ export default function NewHome() {
     getHome(editId).then((h) => {
       if (!h || h.agentId !== user.uid) { setMissing(true); return }
       setExisting(h)
-      setF({ address: h.address, names: h.buyer.names, closingDate: h.closingDate, email: h.buyer.email, phone: h.buyer.phone })
+      setNames(h.buyer.nameList?.length ? h.buyer.nameList : [h.buyer.names])
+      setF({ address: h.address, closingDate: h.closingDate, email: h.buyer.email, phone: h.buyer.phone })
       setPhotoPath(h.photoPath)
     })
   }, [editId, user])
@@ -58,7 +60,8 @@ export default function NewHome() {
       }
       home.address = f.address.trim()
       home.photoPath = photoPath
-      home.buyer = { names: f.names.trim(), email: f.email.trim(), phone: f.phone.trim() }
+      const list = names.map((x) => x.trim()).filter(Boolean)
+      home.buyer = { names: formatNames(list), nameList: list, email: f.email.trim(), phone: f.phone.trim() }
       home.closingDate = f.closingDate
       await saveHome(home)
       nav(next === 'list' ? '/homes' : `/homes/${homeId}`)
@@ -95,7 +98,17 @@ export default function NewHome() {
         <section className="card sec">
           <h2 className="section-title">The buyer</h2>
           <div className="fields">
-            <label>Buyer name(s)<input className="input" value={f.names} onChange={set('names')} placeholder="Buyer names" /></label>
+            <div className="field" style={{ flexBasis: 240 }}>
+              <span>Buyer name{names.length > 1 ? 's' : ''}</span>
+              {names.map((n, i) => (
+                <span key={i} style={{ display: 'flex', gap: 6 }}>
+                  <input className="input" aria-label={`Buyer ${i + 1} name`} value={n} placeholder={i === 0 ? 'Full name' : 'Another buyer’s full name'}
+                    onChange={(e) => setNames(names.map((x, j) => (j === i ? e.target.value : x)))} />
+                  {names.length > 1 && <button type="button" className="icon-btn" aria-label={`Remove buyer ${i + 1}`} onClick={() => setNames(names.filter((_, j) => j !== i))}>✕</button>}
+                </span>
+              ))}
+              <button type="button" className="btn btn-secondary" style={{ alignSelf: 'flex-start', minHeight: 44, fontSize: 13 }} onClick={() => setNames([...names, ''])}>+ Add another buyer</button>
+            </div>
             <label>Closing date<input className="input" type="date" value={f.closingDate} onChange={set('closingDate')} /></label>
             <label>Email<input className="input" type="email" value={f.email} onChange={set('email')} placeholder="Buyer email" /></label>
             <label>Mobile phone<input className="input" type="tel" value={f.phone} onChange={set('phone')} placeholder="Buyer phone" /></label>

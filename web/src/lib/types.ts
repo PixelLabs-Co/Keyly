@@ -15,7 +15,7 @@ export type Home = {
   agentId: string
   address: string
   photoPath?: string
-  buyer: { names: string; email: string; phone: string }
+  buyer: { names: string; nameList?: string[]; email: string; phone: string }
   closingDate: string // YYYY-MM-DD
   status: HomeStatus
   details: {
@@ -77,4 +77,11 @@ export function formatDate(d: string): string {
   if (!d) return '—'
   const [y, m, day] = d.split('-').map(Number)
   return new Date(y, m - 1, day).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+}
+
+/** "Sam", "Sam & Alex", "Sam, Alex & Jo". Stored in buyer.names so the buyer app can show it as-is. */
+export function formatNames(list: string[]): string {
+  const n = list.map((x) => x.trim()).filter(Boolean)
+  if (n.length <= 2) return n.join(' & ')
+  return `${n.slice(0, -1).join(', ')} & ${n[n.length - 1]}`
 }
